@@ -4,8 +4,8 @@ Proyek ini adalah implementasi AI Agent otonom yang melakukan scraping data hote
 
 ## 🔗 Deliverables Links (Wajib)
 
-- **Deployed Web App:** [MASUKKAN_LINK_VERCEL_DISINI]
-- **Live Social Media Post (Dev.to):** [MASUKKAN_LINK_ARTIKEL_DEVTO_DISINI]
+- **Deployed Web App:** https://ai-agent-scrape-generate-publish.vercel.app/
+- **Live Social Media Post (Dev.to):** https://dev.to/wxgx
 - **Raw AI Coding Logs:** Lihat folder [`/ai-logs`](./ai-logs) di repositori ini.
 
 ## 🛠️ Tech Stack
@@ -20,7 +20,7 @@ Proyek ini adalah implementasi AI Agent otonom yang melakukan scraping data hote
 
 ## 🚀 How to Run Locally
 
-1. Clone repositori ini: `git clone [LINK_REPO_KAMU]`
+1. Clone repositori ini: `git clone https://github.com/WageSapta/ai-agent-scrape-generate-publish`
 2. Install dependencies: `npm install`
 3. Buat file `.env.local` dan masukkan API Keys (Firecrawl, OpenRouter, Devto, Cron Secret).
 4. Jalankan server: `npm run dev`
