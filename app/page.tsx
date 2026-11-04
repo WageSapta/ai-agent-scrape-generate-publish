@@ -1,69 +1,121 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Workbench } from "@/components/workbench";
+
+const PIPELINE = ["Firecrawl", "OpenRouter", "Pollinations", "Dev.to", "cron-job.org"];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="relative z-10 flex min-h-dvh flex-col">
+      <header className="border-b border-line/70">
+        <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between gap-4 px-5 py-4 sm:px-8">
+          <Link href="/" className="group flex items-center gap-3">
+            <span className="display grid h-9 w-9 place-items-center rounded-full border border-brass/40 bg-brass/10 text-brass-soft transition-colors group-hover:bg-brass/15">
+              <Sparkles className="h-4 w-4" aria-hidden />
+            </span>
+            <span className="leading-tight">
+              <span className="block text-[0.66rem] uppercase tracking-[0.2em] text-bone">
+                Hotel AI Auto-Publisher
+              </span>
+              <span className="block text-[0.6rem] tracking-[0.08em] text-muted">
+                Hotel Atelier · AI editorial desk
+              </span>
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <span className="hidden items-center gap-2 rounded-full border border-line px-3 py-1.5 text-[0.62rem] tracking-[0.04em] text-muted sm:inline-flex">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sage" />
+              </span>
+              cron-job.org · every 2h
+            </span>
+            <Badge variant="outline">Stateless</Badge>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="flex-1">
+        <Workbench />
       </main>
+
+      <div className="mt-16 border-y border-line/70 bg-panel/30">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-3 text-[0.57rem] uppercase tracking-[0.2em] text-muted/60 sm:px-8">
+          {PIPELINE.map((item, index) => (
+            <span key={item} className="flex items-center gap-4">
+              {index > 0 ? <ArrowRight className="h-2.5 w-2.5 text-brass/40" aria-hidden /> : null}
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <footer>
+        <div className="mx-auto w-full max-w-[1320px] px-5 py-9 sm:px-8">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
+            <div className="max-w-sm">
+              <p className="display text-2xl text-bone">Hotel Atelier</p>
+              <p className="mt-2 text-[0.72rem] leading-relaxed text-muted">
+                An autonomous editorial desk for hospitality. A spec-driven build: no database, no
+                stored drafts, no manual copywriting.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 text-[0.7rem] sm:grid-cols-3">
+              <div>
+                <p className="text-[0.56rem] uppercase tracking-[0.16em] text-muted/60">Pipeline</p>
+                <ul className="mt-2 space-y-1 text-bone/65">
+                  <li>Firecrawl</li>
+                  <li>OpenRouter</li>
+                  <li>Pollinations</li>
+                  <li>Dev.to API</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-[0.56rem] uppercase tracking-[0.16em] text-muted/60">Scheduler</p>
+                <ul className="mt-2 space-y-1 text-bone/65">
+                  <li>cron-job.org</li>
+                  <li>GET /api/cron</li>
+                  <li>Every 2 hours</li>
+                  <li>Bearer secret</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-[0.56rem] uppercase tracking-[0.16em] text-muted/60">Elsewhere</p>
+                <ul className="mt-2 space-y-1">
+                  <li>
+                    <a
+                      href="https://dev.to/wxgx"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-bone/65 underline decoration-line underline-offset-4 transition-colors hover:text-brass-soft hover:decoration-brass/50"
+                    >
+                      Dev.to / wxgx
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://cron-job.org"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-bone/65 underline decoration-line underline-offset-4 transition-colors hover:text-brass-soft hover:decoration-brass/50"
+                    >
+                      cron-job.org
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-2 border-t border-line/60 pt-5 text-[0.6rem] text-muted/55 sm:flex-row sm:items-center sm:justify-between">
+            <span>Stateless by design — nothing is stored between requests.</span>
+            <span>Firecrawl · OpenRouter · Pollinations · Dev.to</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
