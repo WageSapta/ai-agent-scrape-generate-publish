@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { runAgent } from "@/lib/agent";
 import { AgentError, errorMessage, errorStatus } from "@/lib/errors";
 import { parsePublicHttpUrl } from "@/lib/utils";
+import { validatePublicHttpUrl } from "@/lib/server-url-safety";
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
     if (!url) {
       throw new AgentError("A hotel URL is required.", 400);
     }
-    if (!parsePublicHttpUrl(url)) {
+    if (!parsePublicHttpUrl(url) || !(await validatePublicHttpUrl(url))) {
       throw new AgentError(
         "Enter a public http(s) URL, for example https://www.ayana.com/bali/",
         400,

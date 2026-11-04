@@ -58,6 +58,7 @@ export function parsePublicHttpUrl(value: string): URL | null {
   return url;
 }
 
+
 export function absoluteHttpUrl(value: unknown, base: string): string | null {
   const candidate = stringValue(value);
   if (!candidate) return null;

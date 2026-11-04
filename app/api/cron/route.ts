@@ -2,16 +2,15 @@ import { NextResponse } from "next/server";
 import { runAndPublish } from "@/lib/agent";
 import { errorMessage } from "@/lib/errors";
 import { pickRandomHotelUrl } from "@/lib/hotel-sources";
+import { validatePublicHttpUrl } from "@/lib/server-url-safety";
+import { parsePublicHttpUrl } from "@/lib/utils";
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 function isAuthorized(request: Request): boolean {
   const secret = process.env.CRON_SECRET;
 
-  if (!secret) {
-    // Fail closed in production. Local development may run without a secret.
-    return process.env.NODE_ENV !== "production";
-  }
+  if (!secret) return false;
 
   const header = request.headers.get("authorization") ?? "";
   return header === `Bearer ${secret}`;
@@ -24,6 +23,14 @@ async function handleCron(request: Request) {
 
   const params = new URL(request.url).searchParams;
   const sourceUrl = params.get("url")?.trim() || pickRandomHotelUrl();
+
+  if (!parsePublicHttpUrl(sourceUrl)) {
+    return NextResponse.json({ success: false, error: "The cron URL is not a valid public http(s) URL.", sourceUrl }, { status: 400 });
+  }
+
+  if (!(await validatePublicHttpUrl(sourceUrl))) {
+    return NextResponse.json({ success: false, error: "The cron URL resolves to a private or inaccessible network address.", sourceUrl }, { status: 400 });
+  }
 
   if (params.get("dryRun") === "1") {
     return NextResponse.json({

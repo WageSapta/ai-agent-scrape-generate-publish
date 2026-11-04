@@ -94,7 +94,7 @@ async function requestCompletion(
     throw new AgentError("OPENROUTER_API_KEY is not configured on the server.", 500);
   }
 
-  const model = process.env.OPENROUTER_MODEL?.trim() || "openrouter/free";
+  const model = "openrouter/free";
   const response = await fetch(OPENROUTER_ENDPOINT, {
     method: "POST",
     headers: {

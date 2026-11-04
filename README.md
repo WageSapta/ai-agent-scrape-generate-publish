@@ -25,6 +25,18 @@ Proyek ini adalah implementasi AI Agent otonom yang melakukan scraping data hote
 3. Buat file `.env.local` dan masukkan API Keys (Firecrawl, OpenRouter, Devto, Cron Secret).
 4. Jalankan server: `npm run dev`
 
+## ⏱️ cron-job.org Setup
+
+Konfigurasi cron-job.org untuk menjalankan otomasi setiap 2 jam:
+
+1. Buat cron job baru dengan URL produksi:
+   `https://YOUR-DEPLOYMENT.vercel.app/api/cron`
+2. Pilih HTTP method `GET`.
+3. Schedule expression: `0 */2 * * *` (menjalankan setiap dua jam).
+4. Tambahkan request header:
+   `Authorization: Bearer YOUR_CRON_SECRET`
+5. Pastikan semua environment variable produksi sudah diisi: Firecrawl, OpenRouter, Dev.to, dan `CRON_SECRET`.
+
 ## 🧠 AI Vibe Coding Notes
 
 Seluruh pengembangan kode (UI dan Backend) diinstruksikan melalui AI Agent (Cursor). Proses iterasi (Prompt, AI Response, Errors, Steering) didokumentasikan secara transparan di dalam folder `/ai-logs`.

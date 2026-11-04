@@ -7,9 +7,10 @@ import {
   stringArray,
   stringValue,
 } from "@/lib/utils";
+import { validatePublicHttpUrl } from "@/lib/server-url-safety";
 
 const FIRECRAWL_ENDPOINT = "https://api.firecrawl.dev/v2/scrape";
-const REQUEST_TIMEOUT_MS = 30_000;
+const REQUEST_TIMEOUT_MS = 60_000;
 
 const hotelSchema = {
   type: "object",
@@ -70,7 +71,7 @@ export async function scrapeHotel(url: string): Promise<ScrapedHotel> {
   if (!apiKey) {
     throw new AgentError("FIRECRAWL_API_KEY is not configured on the server.", 500);
   }
-  if (!parsePublicHttpUrl(url)) {
+  if (!parsePublicHttpUrl(url) || !(await validatePublicHttpUrl(url))) {
     throw new AgentError("Please provide a valid public http(s) hotel URL.", 400);
   }
 
@@ -92,7 +93,7 @@ export async function scrapeHotel(url: string): Promise<ScrapedHotel> {
         "markdown",
       ],
       onlyMainContent: true,
-      proxy: "auto",
+      proxy: "stealth",
       timeout: REQUEST_TIMEOUT_MS,
       waitFor: 1200,
       blockAds: true,
