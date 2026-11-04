@@ -6,7 +6,7 @@ Proyek ini adalah implementasi AI Agent otonom yang melakukan scraping data hote
 
 - **Deployed Web App:** https://ai-agent-scrape-generate-publish.vercel.app/
 - **Live Social Media Post (Dev.to):** https://dev.to/wxgx
-- **Raw AI Coding Logs:** Lihat folder [`/ai-logs`](./ai-logs) di repositori ini.
+- **Raw AI Coding Logs:** Lihat folder [`ai-logs/readable`](https://github.com/WageSapta/ai-agent-scrape-generate-publish/tree/main/ai-logs/readable).
 
 ## 🛠️ Tech Stack
 
