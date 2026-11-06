@@ -1,5 +1,5 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
 
 const rootDir = path.resolve(__dirname, "..");
 const inputPath = path.join(rootDir, "ai-logs", "01-raw-transcript.json");
